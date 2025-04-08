@@ -6,12 +6,17 @@ cd /home/ghb/monero-miner-setup || exit
 # Adiciona todos os arquivos
 git add .
 
-# Solicita mensagem de commit
-read -p "Mensagem de commit: " mensagem
+# Obtém data e hora atual
+data_atual=$(date +"%Y-%m-%d %H:%M:%S")
 
-# Usa mensagem padrão se o usuário não digitar nada
+# Solicita mensagem opcional do usuário
+read -p "Mensagem de commit (pressione Enter para usar padrão): " mensagem
+
+# Define a mensagem de commit
 if [ -z "$mensagem" ]; then
-    mensagem="Atualização automática"
+    mensagem="Atualização automática em $data_atual"
+else
+    mensagem="$mensagem – $data_atual"
 fi
 
 # Realiza o commit
