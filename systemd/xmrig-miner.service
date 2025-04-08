@@ -1,0 +1,13 @@
+[Unit]
+Description=Minerador Monero com XMRig
+After=network.target
+
+[Service]
+ExecStart=/home/ghb/monero-miner-setup/scripts/start_miner.sh
+WorkingDirectory=/home/ghb/monero-miner-setup/xmrig
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
+
