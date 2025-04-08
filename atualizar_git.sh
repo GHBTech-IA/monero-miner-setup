@@ -24,3 +24,6 @@ git commit -m "$mensagem"
 
 # Envia para o GitHub
 git push origin main
+
+# Registra o commit no log local
+echo "$data_atual | $mensagem" >> /home/ghb/monero-miner-setup/logs/commit-log.txt
