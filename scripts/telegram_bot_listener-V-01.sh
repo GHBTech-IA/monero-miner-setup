@@ -4,7 +4,6 @@ TOKEN="7078100178:AAGa3664wjivxXnNu9i3qlJdjG7LhLvypCM"
 CHAT_ID="237385199"
 OFFSET=0
 MINERADOR=$(hostname)
-LAST_COMMAND=""
 
 get_miner_data() {
   bash ./get_miner_stats.sh
@@ -44,16 +43,18 @@ while true; do
     MESSAGE_TEXT=$(echo "$MSG" | jq -r '.message.text')
     CHAT_ID=$(echo "$MSG" | jq -r '.message.chat.id')
 
-    # Atualiza o último comando ANTES da ação
-    if [[ "$MESSAGE_TEXT" == "/menu" || "$MESSAGE_TEXT" == "/status" ]]; then
-      LAST_COMMAND="$MESSAGE_TEXT"
-    fi
-
     case "$MESSAGE_TEXT" in
       "/menu")
+        LAST_COMMAND="menu"
         send_menu_buttons "menu"
         ;;
       "/status")
+        LAST_COMMAND="status"
+        STATUS=$(get_status_data)
+        curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
+          -d chat_id="$CHAT_ID" \
+          -d text="🔍 *Status do ${MINERADOR}*\n\n\`\`\`\n$STATUS\n\`\`\`" \
+          -d parse_mode="Markdown"
         send_menu_buttons "status"
         ;;
       "works-"*)
