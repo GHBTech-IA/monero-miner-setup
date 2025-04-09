@@ -493,3 +493,63 @@ chmod +x scripts/update_repo.sh
 Contribuições e sugestões são bem-vindas!
 
 
+# 🛠️ Mining Telegram Bot
+
+Um bot do Telegram para monitoramento de mineradores com interface via comandos `/menu`, `/status`, e botões interativos para visualizar informações em tempo real.
+
+## 📦 Estrutura
+
+- `telegram_bot_listener.sh`: Script principal que escuta comandos e interações do Telegram.
+- `get_miner_stats.sh`: Coleta informações de mineração como hashrate, saldo, shares.
+- `get_status.sh`: Exibe status detalhado da máquina (CPU, uptime, RAM, disco, etc.).
+- `send_telegram.sh`: Envia mensagens de alerta do tipo "watchdog" ao Telegram.
+
+## ✅ Comandos do Bot
+
+- `/menu`: Mostra botões para selecionar mineradores e visualizar hashrate e estatísticas.
+- `/status`: Mostra botões e permite visualizar status detalhado da máquina.
+- `works-1` até `works-5`: Responde com os dados conforme o comando enviado anteriormente.
+
+## 🔧 Requisitos
+
+- `jq`, `curl` e `bash` instalados.
+- Token de bot e Chat ID do Telegram configurados nos scripts.
+- Permissões de execução (`chmod +x *.sh`).
+
+## 📷 Exemplo de uso
+
+### Comando `/menu`
+Seleciona minerador e mostra dados de mineração:
+
+
+💻 Minerador: Works-1 
+⚡ Hashrate: 116.67 H/s 
+💰 Saldo pendente: 0.000005 XMR 
+💵 Estimativa em USD: $0.0010 
+✅ Total pago: 0.000000 XMR 
+📊 Hashes enviados: 7319442.73
+
+
+### Comando `/status`
+Seleciona minerador e mostra status da máquina:
+
+🔍 Status do works-1
+
+🖥️ CPU: Pentium(R) Dual-Core CPU E5700 
+💾 Núcleos: 2 CPUs (1 pacote(s) x núcleo(s)) 
+⏱️ Uptime: 2 weeks, 12 hours, 58 minutes 
+📅 Data/hora: qua 09 abr 2025 03:36:48 UTC 
+🌐 IP: 192.168.0.231 
+🧠 Uso da CPU: 4% 
+📈 RAM usada: 3247MB 
+💽 Memória: 84% usada 
+🔃 Swap: 3MB (0%) 
+🗃️ Usado: 7,6G / Total: 110G (8% usados)
+
+
+## 📡 Execução
+
+```bash
+./telegram_bot_listener.sh
+
+
